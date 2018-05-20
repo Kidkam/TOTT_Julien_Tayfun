@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -12,7 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -83,6 +84,7 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
     private SearchView searchBar;
     private Button btnSearch;
     private Button inscriptionB;
+    private LocationManager lm;
 
 
     @Override
@@ -158,8 +160,22 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
 
         databaseManager.close();
 
-
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(lm !=null){
+            lm.removeUpdates((LocationListener) this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getLocationPermission();
+    }
+
 
     /**
      * Saves the state of the map when the activity is paused.
@@ -181,7 +197,7 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.current_place_menu, menu);
+        getMenuInflater().inflate(R.menu.hamb, menu);
         return true;
     }
 
@@ -194,19 +210,6 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
         }
     };
 
-    /**
-     * Handles a click on the menu option to get a place.
-     *
-     * @param item The menu item to handle.
-     * @return Boolean.
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.option_get_place) {
-            showCurrentPlace();
-        }
-        return true;
-    }
 
     /**
      * Manipulates the map when it's available.
@@ -222,6 +225,7 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
                 Toast.LENGTH_SHORT).show();
     }
 
+
     @Override
     public void onMapReady(GoogleMap map) {
         googleMap = map;
@@ -230,10 +234,21 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
 
         // Use a custom info window adapter to handle multiple lines of text in the
         // info window contents.
-        LatLng com = new LatLng(45.764043, 4.835659);
+        LatLng com = new LatLng(45.786183, 4.883517);
         map.addMarker(new MarkerOptions().position(com)
-                .title("Commentaires ici : "));
+                .title("Département Informatique IUT Lyon 1"));
         map.moveCamera(CameraUpdateFactory.newLatLng(com));
+
+        LatLng com2 = new LatLng(45.785993, 4.882813);
+        map.addMarker(new MarkerOptions().position(com2)
+                .title("IUT GEA Lyon 1"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(com2));
+
+        LatLng com3 = new LatLng(45.780772, 4.876454);
+        map.addMarker(new MarkerOptions().position(com3)
+                .title("Restaurant Universitaire Jussieu"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(com3));
+
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
 

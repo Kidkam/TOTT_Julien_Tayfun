@@ -4,12 +4,13 @@ package com.example.currentplacedetailsonmap;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+
 @DatabaseTable( tableName = "parking" )
 public class Parking extends Lieu {
 
+
     @DatabaseField
     protected String type;
-
 
 
     public Parking() {

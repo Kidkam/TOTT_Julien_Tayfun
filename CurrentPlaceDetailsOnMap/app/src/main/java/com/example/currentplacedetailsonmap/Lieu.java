@@ -16,6 +16,30 @@ public abstract class Lieu {
     @DatabaseField
     protected double lng;
 
+    //Getters
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    //Setters
+
     public abstract void setNom(String nom);
     public abstract void setAdresse(String adresse);
     public abstract void setLat(double lat);

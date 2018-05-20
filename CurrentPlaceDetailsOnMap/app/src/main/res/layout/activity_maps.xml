@@ -31,7 +31,7 @@
                 android:id="@+id/lieuView"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@color/colorAccent"
+                android:background="#FFFFFF"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:visibility="visible" />
@@ -59,7 +59,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/colorAccent"
+                android:background="#FFFFFF"
                 android:layout_alignParentLeft="true"
                 android:text="">
             </SearchView>searchBar
@@ -68,7 +68,7 @@
                 android:id="@+id/btnSearch"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="#FFFFFF"
                 android:layout_toRightOf="@+id/searchBar"
                 android:drawableStart="@drawable/find"
                 android:drawableLeft="@drawable/find"
@@ -79,7 +79,7 @@
             android:id="@+id/inscription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="#FFFFFF"
             android:drawableStart="@drawable/ic_comment_black_24dp"
             android:drawableLeft="@drawable/ic_comment_black_24dp"
             android:text="Inscription" />
@@ -88,7 +88,7 @@
             android:id="@+id/Contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="#FFFFFF"
             android:drawableStart="@drawable/ic_report_problem_black_24dp"
             android:drawableLeft="@drawable/ic_report_problem_black_24dp"
             android:text="@string/signaler_une_erreur" />

@@ -12,6 +12,7 @@ public class Batiment extends Lieu {
     @DatabaseField
     protected String type;
 
+
     public Batiment() {
     }
 
@@ -22,6 +23,8 @@ public class Batiment extends Lieu {
         this.setLat(lat);
         this.setLng(lng);
     }
+
+
 
     public void setType(String type) {
         this.type = type;

@@ -4,8 +4,10 @@ package com.example.currentplacedetailsonmap;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+
 @DatabaseTable( tableName = "lieu_detente" )
 public class LieuDetente extends Lieu {
+
 
     @DatabaseField
     protected String type;
@@ -21,6 +23,8 @@ public class LieuDetente extends Lieu {
         this.setLat(lat);
         this.setLng(lng);
     }
+
+
 
     public void setType(String type) {
         this.type = type;
