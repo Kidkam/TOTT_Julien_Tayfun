@@ -1,6 +1,7 @@
 package com.example.currentplacedetailsonmap;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.List;
 
 public class MapsActivityCurrentPlace extends AppCompatActivity
         implements OnMapReadyCallback, GoogleMap.OnPoiClickListener {
@@ -72,6 +77,13 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
     private String[] mLikelyPlaceAttributions;
     private LatLng[] mLikelyPlaceLatLngs;
 
+    private TextView lieuView;
+    private DatabaseManager databaseManager;
+
+    private SearchView searchBar;
+    private Button btnSearch;
+    private Button inscriptionB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +108,57 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        lieuView = (TextView) findViewById(R.id.snippet);
+        databaseManager = new DatabaseManager( this );
+
 
         // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        searchBar = (SearchView) findViewById(R.id.searchBar);
+        btnSearch = (Button) findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(btnSearchListener);
+
+        inscriptionB = (Button) findViewById(R.id.inscription);
+
+        inscriptionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        MapsActivityCurrentPlace.this,
+                        Inscription.class);
+                startActivity(intent);
+
+            }
+        });
+
+        lieuView = (TextView) findViewById(R.id.lieuView);
+        databaseManager = new DatabaseManager( this );
+
+        databaseManager.insertionLieuDetente(new LieuDetente( "parc", "parc_A", "Lyon", 49.7, 5.891));
+        databaseManager.insertionParking(new Parking( "velo", "parking_B", "Lyon", 49.767, 5.89));
+        databaseManager.insertionBatiment(new Batiment( "administration","batiment_C", "Lyon", 49.712, 5.877));
+
+        /*List<Batiment> lieux = databaseManager.readTop5B();
+        for (Batiment batiment : lieux) {
+            lieuView.append(batiment.toString());
+        }
+
+        List<Parking> lieu = databaseManager.readTop5P();
+        for (Parking batiment : lieu) {
+            lieuView.append(batiment.toString());
+        }
+
+        List<LieuDetente> places = databaseManager.readTop5L();
+        for (LieuDetente batiment : places) {
+            lieuView.append(batiment.toString());
+        }*/
+
+        databaseManager.close();
+
+
     }
 
     /**
@@ -126,6 +184,15 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
         getMenuInflater().inflate(R.menu.current_place_menu, menu);
         return true;
     }
+
+    public SearchView.OnClickListener btnSearchListener = new SearchView.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getApplicationContext(), databaseManager.getDatabaseName(), Toast.LENGTH_LONG).show();
+            //databaseManager.readTop5B();
+            //onButtonSearch();
+        }
+    };
 
     /**
      * Handles a click on the menu option to get a place.

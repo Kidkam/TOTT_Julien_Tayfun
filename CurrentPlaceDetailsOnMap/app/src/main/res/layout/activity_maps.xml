@@ -1,7 +1,112 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.currentplacedetailsonmap.MapsActivityCurrentPlace"/>
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/scrollView2"
+            tools:context="com.example.currentplacedetailsonmap.MapsActivityCurrentPlace" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/scrollView2">
+
+            <TextView
+                android:id="@+id/lieuView"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/colorAccent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:visibility="visible" />
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/menu_elements"
+        android:layout_width="200dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#FFFFFF"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <SearchView
+                android:id="@+id/searchBar"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/colorAccent"
+                android:layout_alignParentLeft="true"
+                android:text="">
+            </SearchView>searchBar
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_toRightOf="@+id/searchBar"
+                android:drawableStart="@drawable/find"
+                android:drawableLeft="@drawable/find"
+                android:text="" />
+
+        </RelativeLayout>
+        <Button
+            android:id="@+id/inscription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:drawableStart="@drawable/ic_comment_black_24dp"
+            android:drawableLeft="@drawable/ic_comment_black_24dp"
+            android:text="Inscription" />
+
+        <Button
+            android:id="@+id/Contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:drawableStart="@drawable/ic_report_problem_black_24dp"
+            android:drawableLeft="@drawable/ic_report_problem_black_24dp"
+            android:text="@string/signaler_une_erreur" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/tottlogo" android:contentDescription="TODO" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/toteminc"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:gravity="bottom"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
